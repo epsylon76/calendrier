@@ -36,28 +36,29 @@ echo 'numero dernier jour mois : '.$numlastdayofmonth;
     </tr>
     <tr> <!--premiere ligne -->
       <?php
-      for($i=1; $i < $numdayfirstdayofmonth ;$i++){ //les cases vides
-        echo '<td class="jour_off">';
-        echo '';//rien dans la case
-        echo '</td>';
-      }
-      $curdate = $firstdayofmonth;
-      $curseur = $numdayfirstdayofmonth;
-      for($i=1; $i<=$numlastdayofmonth; $i++){
-        if($curseur == 8){
-          $curseur = 1;
-          echo '<tr>';
-        }
-        echo '<td class="jour_on">';
-        $current = $annee.'-'.$mois.'-'.$i;
-        echo $i;
-        echo '</td>';
+       for ($i = 1; $i <= $numlastdayofmonth; $i++) {
+                                            //on copie le compteur pour ajouter un zéro
+                                            $j = $i;
+                                            str_pad($j, 2, '0', STR_PAD_LEFT);
+                                            $current = $annee . '-' . $mois . '-' . $j;
+                                            if ($curseur == 8) {
+                                                $curseur = 1;
+                                                echo '<tr>';
+                                            }
 
-        if($curseur == 7){
-          echo '</tr>';
-        }
-        $curseur++;
-      }
+
+                                            echo '<td class="jour_on';
+                                            if($current == $today){ echo ' jour_today ';}
+                                            echo '">';
+                                            echo $i;
+                                            echo '</td>';
+
+
+                                            if ($curseur == 7) {
+                                                echo '</tr>';
+                                            }
+                                            $curseur++;
+                                        }
 
       //fermer le tableau
       for($i=$curseur; $i<=7; $i++){
